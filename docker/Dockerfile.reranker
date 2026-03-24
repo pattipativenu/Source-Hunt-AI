@@ -1,0 +1,27 @@
+# GPU-enabled image for MedCPT reranker
+# Requires Cloud Run with NVIDIA L4 GPU
+FROM pytorch/pytorch:2.2.0-cuda11.8-cudnn8-runtime
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY shared/ ./shared/
+COPY services/reranker/ ./services/reranker/
+
+COPY docker/requirements.reranker.txt ./requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Pre-download model weights at build time to avoid cold-start latency
+RUN python -c "from transformers import AutoTokenizer, AutoModelForSequenceClassification; \
+    AutoTokenizer.from_pretrained('ncbi/MedCPT-Cross-Encoder'); \
+    AutoModelForSequenceClassification.from_pretrained('ncbi/MedCPT-Cross-Encoder')"
+
+ENV PYTHONPATH=/app
+ENV PORT=8080
+
+EXPOSE 8080
+
+CMD ["uvicorn", "services.reranker.main:app", "--host", "0.0.0.0", "--port", "8080", "--workers", "1"]

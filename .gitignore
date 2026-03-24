@@ -1,0 +1,49 @@
+# Environment files
+.env
+.env.*
+!.env.local  # Template (no secrets) is safe to commit
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+dist/
+build/
+
+# Model weights (too large for git)
+*.bin
+*.safetensors
+*.pt
+*.pth
+models/
+
+# GCP credentials
+*.json
+service-account*.json
+application_default_credentials.json
+
+# Terraform state
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# Docker
+.dockerignore
+
+# macOS
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Logs
+*.log
+firebase-debug.log
+
+# Evaluation results (generated)
+scripts/eval_data/latest_results.json

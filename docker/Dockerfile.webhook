@@ -1,0 +1,23 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy shared + webhook service
+COPY shared/ ./shared/
+COPY services/webhook/ ./services/webhook/
+
+# Install Python dependencies
+COPY docker/requirements.webhook.txt ./requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+ENV PYTHONPATH=/app
+ENV PORT=8080
+
+EXPOSE 8080
+
+CMD ["uvicorn", "services.webhook.main:app", "--host", "0.0.0.0", "--port", "8080", "--workers", "2"]

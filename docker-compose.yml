@@ -1,0 +1,64 @@
+# Hunt AI — Local development stack
+# Uses Meta WhatsApp Cloud API + Qdrant Cloud (QDRANT_URL in .env)
+#
+# Usage:
+#   cp .env.local .env && vim .env   # Fill in credentials
+#   docker-compose up --build
+#
+# For offline local Qdrant: add --profile local flag
+
+version: "3.9"
+
+services:
+  # Local Qdrant (only if you want offline dev — normally use Qdrant Cloud)
+  qdrant-local:
+    image: qdrant/qdrant:v1.10.1
+    ports:
+      - "6333:6333"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    profiles: ["local"]
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    command: redis-server --maxmemory 512mb --maxmemory-policy allkeys-lru
+
+  webhook:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.webhook
+    ports:
+      - "8080:8080"
+    env_file: .env
+    depends_on:
+      - redis
+    environment:
+      REDIS_HOST: redis
+    # Expose via ngrok for Meta webhook: ngrok http 8080
+
+  worker:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.worker
+    ports:
+      - "8083:8080"
+    env_file: .env
+    depends_on:
+      - redis
+      - reranker
+    environment:
+      REDIS_HOST: redis
+      RERANKER_SERVICE_URL: http://reranker:8080
+
+  # MedCPT reranker (PubMed-specific, CPU-capable)
+  reranker:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.reranker
+    ports:
+      - "8001:8080"
+
+volumes:
+  qdrant_data:

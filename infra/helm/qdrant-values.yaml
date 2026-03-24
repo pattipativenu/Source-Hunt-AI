@@ -1,0 +1,59 @@
+# Qdrant Helm chart values for GKE deployment
+# Chart: https://helm.qdrant.tech/
+
+replicaCount: 3
+
+image:
+  repository: qdrant/qdrant
+  tag: "v1.10.1"
+  pullPolicy: IfNotPresent
+
+resources:
+  requests:
+    cpu: "2"
+    memory: "4Gi"
+  limits:
+    cpu: "4"
+    memory: "8Gi"
+
+persistence:
+  storageClassName: "standard-rwo"  # GKE SSD
+  size: "100Gi"
+
+config:
+  collection:
+    # Default quantization for new collections (overridden per-collection via API)
+    quantization:
+      always_ram: true
+
+  service:
+    host: "0.0.0.0"
+    http_port: 6333
+    grpc_port: 6334
+
+  storage:
+    # WAL for durability on GKE persistent disk
+    wal:
+      wal_capacity_mb: 32
+
+  # Enable payload index for fast metadata filtering
+  optimizer:
+    indexing_threshold_kb: 20000
+
+service:
+  type: ClusterIP
+  port: 6333
+
+# Anti-affinity to spread replicas across GKE nodes
+affinity:
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+              - key: app
+                operator: In
+                values:
+                  - qdrant
+          topologyKey: "kubernetes.io/hostname"
