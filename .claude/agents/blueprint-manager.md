@@ -32,7 +32,7 @@ You enforce the following hierarchy without exception:
 You track the 4-week milestone plan and block merges that would destabilize a milestone:
 - **Week 1 Gate:** Qdrant returns relevant ICMR chunks for 10 test queries. Cohere reranking improves relevance. Gemini generates valid JSON with inline [N] citations.
 - **Week 2 Gate:** End-to-end WhatsApp message → cited answer in < 10 seconds. Reply buttons work. Long answers split correctly.
-- **Week 3 Gate:** India-aware responses. "Dolo 650" → Paracetamol with Indian pricing. ICMR guideline appears before IDSA for India-specific queries. 7/10 benchmark queries pass.
+- **Week 3 Gate:** India-aware responses. Internal brand resolution (e.g., Dolo → Paracetamol) with Indian generic pricing. ICMR guideline appears before IDSA for India-specific queries. 7/10 benchmark queries pass.
 - **Week 4 Gate:** Meta business verification approved. 5+ doctors tested. Zero hallucinated statistics in last 50 test queries.
 
 ### 4. Scope Creep Prevention

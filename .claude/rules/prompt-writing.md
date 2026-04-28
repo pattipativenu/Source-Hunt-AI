@@ -60,17 +60,17 @@ Prompts that do not follow this structure are rejected.
 
 ---
 
-## Rule P-5: The Emergency Block is Always First
+## Rule P-5: The Acute Protocol Block is Always First
 
-**The rule:** In every prompt that includes routing logic, the emergency detection `<if_block>` must be the first block. No other block may precede it.
+**The rule:** In every prompt that includes routing logic, the acute clinical protocol detection `<if_block>` must be the first block. No other block may precede it.
 
-**Why:** Emergency detection must fire before any retrieval or generation. If the emergency block is buried in the middle of the routing section, there is a risk that a different block fires first.
+**Why:** Acute scenarios (e.g., stroke, anaphylaxis) require immediate evidence-based management protocols. Detecting these scenarios first ensures the system prioritizes the "Golden Hour" interventions that the doctor needs to perform immediately.
 
 ---
 
-## Rule P-6: Every Non-Emergency Block Must Include a Follow-Up Question
+## Rule P-6: Every Non-Acute Block Must Include a Follow-Up Question
 
-**The rule:** Every `<if_block>` that is not the emergency block must include an instruction to generate a `follow_up_question`. The follow-up question must be specific, clinically relevant, and answerable by Noocyte AI.
+**The rule:** Every `<if_block>` that is not an acute protocol block must include an instruction to generate a `follow_up_question`. The follow-up question must be specific, clinically relevant, and answerable by Noocyte AI.
 
 **Why:** The `follow_up_question` is the product's primary engagement mechanism. It is what keeps doctors using the tool, asking more questions, and spending more time with it. Omitting it is a product failure, not just a prompt failure.
 

@@ -100,8 +100,8 @@ When reviewing retrieved evidence, check the hierarchy is correct:
 
 **Drug availability:**
 - Is the drug mentioned actually available in India? (Some drugs mentioned in US guidelines are not marketed in India)
-- Is the Indian branded name mentioned alongside the INN for common drugs?
-- Example: Clarify "Ecosprin" = Aspirin, "Glycomet" = Metformin, "Zifi" = Cefixime
+- Is the brand name in the query resolved to the correct INN internally?
+- **Absolute Brand Neutrality:** Verify that the final output contains ONLY the INN (generic) and NO brand names.
 
 **ICMR Priority:**
 - When an ICMR STW (Standard Treatment Workflow) covers the condition, is it cited first?
@@ -111,27 +111,23 @@ When reviewing retrieved evidence, check the hierarchy is correct:
 - For infectious disease queries from India: is malaria, dengue, leptospirosis, typhoid in the differential when relevant?
 - Regional resistance patterns (e.g., fluoroquinolone resistance in E. coli, MDR-TB prevalence)
 
-### 5. Emergency Detection Protocol
+### 5. Acute Clinical Protocol Priority
 
-The following queries require an immediate safety warning BEFORE providing any evidence:
+The following queries require immediate, evidence-based management protocols in the first sentence (BLUF):
 
-**Life-threatening emergencies:**
+**Acute scenarios:**
 - Cardiac arrest, STEMI, stroke code, status epilepticus
 - Anaphylaxis, anaphylactic shock
 - Massive hemorrhage, tension pneumothorax
 - Septic shock, DKA with altered mental status
 - Overdose/poisoning with altered consciousness
 
-**Required output format for emergencies:**
-```
-⚠️ MEDICAL EMERGENCY DETECTED
+**Required output format for acute cases:**
+1. **IMMEDIATE ACTION:** State the first-line intervention immediately (e.g., "Adrenaline 0.5mg IM [N]").
+2. **PROTOCOL:** Provide the step-by-step management according to ICMR or international guidelines [N].
+3. **TIMING:** Explicitly mention critical windows (e.g., thrombolysis window).
 
-Call 108 (ambulance) or 102 immediately.
-
-[Evidence follows for reference while awaiting emergency services]
-```
-
-Never provide evidence-only responses to emergency queries without this header.
+Never tell a doctor to call an ambulance; provide the evidence they need to manage the patient.
 
 ### 6. Citation Accuracy Review
 
@@ -160,7 +156,7 @@ Score each response on:
 | Evidence accuracy | 25% | Claims match cited sources |
 | Source quality | 15% | Appropriate tier journals and guidelines |
 | Completeness | 10% | Key safety flags mentioned |
-| Indian context | 10% | ICMR first, Indian drugs named |
+| Indian context | 10% | ICMR first, brand-neutral output |
 
 A response scoring below 0.80 overall, or below 0.70 on Safety, should not be delivered to the doctor.
 
@@ -168,7 +164,7 @@ A response scoring below 0.80 overall, or below 0.70 on Safety, should not be de
 
 ## How to Communicate Medical Review Findings
 
-**Format your review as:**
+Format your review as:
 
 ```
 SAFETY: [PASS / FAIL / CONDITIONAL]

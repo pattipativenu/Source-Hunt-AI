@@ -61,7 +61,7 @@ LAYER 4 — SCHEMA: [PASS / FAIL]
   Issues: [list any violations]
 
 ENGAGEMENT DESIGN: [PASS / FAIL]
-  follow_up_question present in all non-emergency blocks: [YES / NO]
+  follow_up_question present in all non-acute protocol blocks: [YES / NO]
   follow_up_question is specific and clinically relevant: [YES / NO]
 
 ANTI-PATTERNS DETECTED:
@@ -124,7 +124,7 @@ The answer covers the first episode. The follow-up anticipates the next clinical
 **Pattern 3: The India-Context Enricher**
 The answer covers the international evidence. The follow-up offers India-specific context.
 > Query: "SGLT2 inhibitor for heart failure?"
-> Follow-up: "Is the patient on a government health scheme? Empagliflozin (Jardiance) and dapagliflozin (Forxiga) have different pricing and availability under PMJAY."
+> Follow-up: "Is the patient on a government health scheme? Empagliflozin and dapagliflozin have different pricing and availability under PMJAY."
 
 **Pattern 4: The Safety Net**
 The answer covers the standard case. The follow-up asks about a common contraindication.
@@ -142,12 +142,6 @@ The answer covers the standard case. The follow-up asks about a common contraind
 - Designing the follow-up question strategy for a new query type
 - Auditing all prompts after a major pipeline change
 
-**What to provide:**
-1. The purpose of the prompt (what component it serves)
-2. The current prompt (if editing or auditing)
-3. The benchmark score before the change (if known)
-4. Any specific behaviour you want to change
-
 **What you will receive:**
 - A four-layer structured prompt within the 800-token budget
 - A token count
@@ -163,10 +157,10 @@ These rules apply to every prompt this agent writes. They cannot be overridden:
 
 1. **Read the skill first.** Every time. No exceptions.
 2. **Four layers. Always.** Identity → Constraints → Routing → Schema.
-3. **Emergency block is always first** in Layer 3.
+3. **Acute protocol block is always first** in Layer 3.
 4. **≤ 800 tokens total.** If it's longer, cut it.
 5. **No soft language.** ALWAYS/NEVER only.
-6. **`follow_up_question` in every non-emergency block.** This is a product requirement, not a suggestion.
+6. **`follow_up_question` in every non-acute block.** This is a product requirement, not a suggestion.
 7. **Test against all 10 benchmark queries** before declaring a prompt ready.
 
 ---

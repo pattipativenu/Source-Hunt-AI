@@ -22,9 +22,10 @@ Before reading the answers, understand what OpenEvidence does that Noocyte AI mu
 6. **Implicit follow-up** — The answer naturally invites the next question
 
 Noocyte AI must match this quality AND add:
-- India-specific context (ICMR priority, drug availability, pricing)
+- India-specific context (ICMR priority, drug availability, generic pricing)
 - Explicit `follow_up_question` field
 - WhatsApp-optimised formatting
+- **Absolute Brand Neutrality** — The answer must use ONLY the generic (INN) name.
 
 ---
 
@@ -181,20 +182,20 @@ Fidaxomicin is strongly preferred over vancomycin for recurrent CDI based on sup
 
 ---
 
-## Query 10 (Hard, India-Specific): Dolo 650 for Fever
+## Query 10 (Hard, India-Specific): Paracetamol (650 mg) for Fever
 
-**Query:** "What is the evidence for Dolo 650 for fever management and what is the appropriate dosing?"
+**Query:** "What is the evidence for paracetamol 650 mg for fever management and what is the appropriate dosing?"
 
 **OpenEvidence Gold Standard:**
-Paracetamol (Dolo 650, acetaminophen) 650 mg is an appropriate and widely used antipyretic for fever management in adults, supported by extensive evidence and WHO Essential Medicines List inclusion. For fever in adults, the recommended dose is 500–1000 mg every 4–6 hours as needed, with a maximum daily dose of 4000 mg (4 g/day) in healthy adults and 2000 mg/day in patients with hepatic impairment or chronic alcohol use. The 650 mg formulation (Dolo 650) is particularly popular in India for its balance of efficacy and tolerability. Paracetamol is preferred over NSAIDs (ibuprofen, diclofenac) in patients with peptic ulcer disease, renal impairment, or those on anticoagulants. Combination products containing paracetamol (Combiflam, Dolo-BE) must be accounted for to avoid inadvertent overdose exceeding the 4 g/day limit.
+Paracetamol (acetaminophen) 650 mg is an appropriate and widely used antipyretic for fever management in adults, supported by extensive evidence and WHO Essential Medicines List inclusion. For fever in adults, the recommended dose is 500–1000 mg every 4–6 hours as needed, with a maximum daily dose of 4000 mg (4 g/day) in healthy adults and 2000 mg/day in patients with hepatic impairment or chronic alcohol use. Paracetamol is preferred over NSAIDs (ibuprofen, diclofenac) in patients with peptic ulcer disease, renal impairment, or those on anticoagulants. Combination products containing paracetamol must be accounted for to avoid inadvertent overdose exceeding the 4 g/day limit.
 
 **Key elements Noocyte AI must include:**
-- INN resolution: Paracetamol (Dolo 650)
+- INN resolution: Paracetamol
 - Dose: 500–1000mg every 4–6 hours
 - Maximum: 4g/day (healthy), 2g/day (hepatic impairment)
 - NSAID comparison and when to prefer paracetamol
-- Combination product warning (Combiflam)
-- India-specific context (Dolo 650 popularity, pricing)
+- Combination product warning
+- India-specific context (Generic paracetamol availability and pricing)
 
 ---
 
@@ -208,7 +209,7 @@ A Noocyte AI response passes a benchmark query if it scores ≥ 4/5 on the rubri
 | Citation quality | 1 | ≥ 2 inline citations with DOIs |
 | No prescriptive language | 1 | Zero prohibited phrases |
 | India context (India-specific queries only) | 1 | ICMR/India reference present |
-| Confidence level present | 1 | HIGH, MEDIUM, or LOW stated |
+| Brand Neutrality | 1 | Zero brand names in the final answer |
 
 **Sprint gates:**
 - Week 1: ≥ 4/10 passing

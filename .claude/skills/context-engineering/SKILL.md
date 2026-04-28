@@ -50,13 +50,6 @@ def assemble_context_with_lost_in_middle_mitigation(
     
     Strategy: Best chunk first, second-best chunk last.
     This ensures the most relevant evidence is in high-attention positions.
-    
-    Args:
-        chunks: List of reranked chunks, sorted by relevance (best first)
-        max_tokens: Maximum tokens for the context window
-    
-    Returns:
-        Formatted context string for Gemini
     """
     if not chunks:
         return "No relevant evidence found in the knowledge base."
@@ -116,6 +109,7 @@ NEVER use: "prescribe", "administer", "give the patient", "start on"
 ALWAYS use: "Guidelines recommend [N]", "Evidence supports [N]", "According to [source] [N]"
 EVERY statistical claim (%, HR, p-value, NNT) MUST have an inline [N] citation.
 If the query involves an Indian condition, cite ICMR guidelines BEFORE international guidelines.
+NEVER include drug brand names in the final answer; use generic (INN) names only.
 
 # LAYER 3: OUTPUT STRUCTURE
 Respond in this exact JSON format:
@@ -135,10 +129,6 @@ Model your answers on the OpenEvidence style:
 - End with a follow-up question to deepen engagement
 """
 ```
-
-### Why This Order Matters
-
-The layers are ordered by importance. Gemini reads the system prompt from top to bottom. The most critical constraints (identity, hard rules) come first so they are in the high-attention zone.
 
 ---
 
@@ -165,32 +155,10 @@ FEW_SHOT_STRATEGY = {
         # Example 3: Brand name query (tests INN resolution)
         {
             "query": "Dolo 650 for fever",
-            "ideal_answer": "Paracetamol (Dolo 650) 650mg is appropriate for fever management in adults [1]. Standard dosing is 500-1000mg every 4-6 hours, maximum 4g/day [2]...",
+            "ideal_answer": "Paracetamol 650mg is appropriate for fever management in adults [1]. Standard dosing is 500-1000mg every 4-6 hours, maximum 4g/day [2]...",
         },
     ],
-    
-    "bad_examples_to_avoid": [
-        # Don't use examples that are too easy — they don't teach the model anything
-        {"query": "What is hypertension?", "answer": "..."},
-    ],
 }
-
-def build_few_shot_context(query_type: str) -> str:
-    """Select the most relevant few-shot example for the current query type."""
-    examples = {
-        "drug_comparison": FEW_SHOT_STRATEGY["good_examples"][0],
-        "india_specific": FEW_SHOT_STRATEGY["good_examples"][1],
-        "drug_lookup": FEW_SHOT_STRATEGY["good_examples"][2],
-    }
-    
-    example = examples.get(query_type, examples["drug_comparison"])
-    
-    return f"""
-EXAMPLE QUERY: {example['query']}
-EXAMPLE ANSWER: {example['ideal_answer']}
-
-Now answer the following query in the same style:
-"""
 ```
 
 ---
@@ -208,25 +176,6 @@ TOKEN_BUDGET = {
     "output_buffer": 1000,     # Reserve for the generated answer
     "total": 8600,             # Well within Gemini 2.5 Flash's limit
 }
-
-def estimate_tokens(text: str) -> int:
-    """Rough token estimate: 1 token ≈ 4 characters for English medical text."""
-    return len(text) // 4
-
-def check_token_budget(context: str, query: str) -> dict:
-    """Verify the assembled context fits within the token budget."""
-    context_tokens = estimate_tokens(context)
-    query_tokens = estimate_tokens(query)
-    system_tokens = TOKEN_BUDGET["system_prompt"]
-    
-    total = context_tokens + query_tokens + system_tokens + TOKEN_BUDGET["output_buffer"]
-    
-    return {
-        "total_estimated": total,
-        "within_budget": total < 8600,
-        "context_tokens": context_tokens,
-        "recommendation": "Truncate context" if context_tokens > 6000 else "OK",
-    }
 ```
 
 ---
@@ -263,29 +212,12 @@ Before finalizing your answer, verify:
 
 ## What NOT to Do
 
-```python
-# ❌ Dumping all chunks in order without lost-in-middle mitigation
-context = "\n".join([c["text"] for c in chunks])  # Best chunk may be in the middle
+1. **Dumping all chunks in order** without lost-in-middle mitigation.
+2. **Putting the system prompt at the END** of the context.
+3. **Using the same few-shot examples** for every query type.
+4. **Not reserving token budget** for the output.
 
-# ❌ Putting the system prompt at the END of the context
-messages = [
-    {"role": "user", "content": context + "\n\n" + system_prompt},  # WRONG ORDER
-]
-
-# ❌ Using the same few-shot examples for every query type
-# Drug comparison examples don't help for emergency queries
-
-# ❌ Not reserving token budget for the output
-# If the context fills the entire window, Gemini has no room to generate a response
-
-# ✅ Always: system prompt first, few-shot examples second, context third, query last
-messages = [
-    {"role": "system", "content": system_prompt},
-    {"role": "user", "content": few_shot_example},
-    {"role": "assistant", "content": few_shot_answer},
-    {"role": "user", "content": f"EVIDENCE:\n{context}\n\nQUESTION: {query}"},
-]
-```
+**Always: system prompt first, few-shot examples second, context third, query last.**
 
 ---
 
