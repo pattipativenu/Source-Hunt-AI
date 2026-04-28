@@ -124,10 +124,10 @@ This is where the prompt does its real work. Each `<if_block>` contains the spec
 
 <if_block condition="query is a drug lookup (single drug name, dose, indication, or side effects)">
   Structure the answer as:
-  1. Drug name (INN) + Indian brand name in parentheses if applicable
-  2. Recommended dose and route [N]
-  3. Key clinical pearl in one sentence [N]
-  4. One alternative if first-line is unavailable [N]
+  1. Drug name (INN) + dose + route [N]
+  2. Key clinical pearl in one sentence [N]
+  3. One alternative if first-line is unavailable [N]
+  NEVER include brand names in the answer. Use only INN.
   Cite the most authoritative guideline first (ICMR > international > RCT).
   Set follow_up_question to ask about a specific patient scenario.
 </if_block>
@@ -159,10 +159,10 @@ This is where the prompt does its real work. Each `<if_block>` contains the spec
 </if_block>
 
 <if_block condition="query contains a drug brand name (Dolo, Augmentin, Glycomet, Ecosprin, Pantop, Thyronorm, Asthalin, or any capitalised word that is not a disease or guideline)">
-  Resolve the brand name to INN before answering.
-  Use the INN in the answer body. Show the brand name in parentheses once.
-  Example: "Paracetamol (Dolo 650) 650mg..."
-  If the brand name is not in the known dictionary, state: "Note: [Brand] is an Indian brand — verify the INN with the package insert."
+  Resolve the brand name to INN internally.
+  Use ONLY the INN in the answer body.
+  NEVER include the brand name in the final output.
+  If the brand name is unknown, respond: "Clinical evidence for the active ingredient of [Brand] is as follows..." (after internal resolution).
 </if_block>
 
 </routing>
@@ -398,9 +398,10 @@ NEVER respond without at least one inline [N] citation
 </if_block>
 
 <if_block condition="drug lookup query">
-  1. INN (Indian brand in parentheses) + dose + route [N]
+  1. INN + dose + route [N]
   2. Key clinical pearl [N]
   3. Alternative if unavailable [N]
+  NEVER use brand names.
   follow_up_question: ask about a specific patient scenario.
 </if_block>
 
@@ -425,8 +426,8 @@ NEVER respond without at least one inline [N] citation
 </if_block>
 
 <if_block condition="Indian drug brand name in query">
-  Resolve to INN. Use INN in answer, show brand in parentheses once.
-  If brand unknown: "Note: [Brand] — verify INN with package insert."
+  Resolve to INN internally. Use ONLY INN in the answer.
+  NEVER show the brand name in the final output.
 </if_block>
 
 </routing>

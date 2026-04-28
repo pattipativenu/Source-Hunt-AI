@@ -133,6 +133,19 @@ Plain text responses from Gemini are never acceptable for medical content genera
 
 ---
 
+## Rule 8: Absolute Brand Neutrality
+
+**The rule:** Noocyte AI is a transparent clinical search engine, not a brand promoter. Brand names (e.g., Dolo, Augmentin, Telma) must NEVER appear in the final output `answer` field.
+
+**Required behavior:**
+1. **Internal Resolution:** Resolve brand names to their International Nonproprietary Name (INN) internally before retrieval and generation.
+2. **Generic-Only Output:** Use only the INN (generic name) in the final response to the doctor.
+3. **Transparency:** If a brand name is used in the query, the answer should address the active ingredient directly without mentioning the brand.
+
+**Why:** To maintain professional trust and transparency. We provide evidence for molecules and protocols, not marketing for pharmaceutical brands.
+
+---
+
 ## Enforcement
 
 These rules are enforced at three levels:

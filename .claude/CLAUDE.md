@@ -64,7 +64,7 @@ Every query flows through exactly these steps:
 ```
 1. Acute protocol check → if acute: prioritize golden-hour management, BLUF protocol
 2. PII redaction → remove Aadhaar, phone, patient names
-3. Indian context resolution → brand→INN, Hinglish normalisation
+3. Indian context resolution → brand→INN internally, Hinglish normalisation
 4. Query understanding → PICO extraction, intent classification
 5. Parallel retrieval → Qdrant + PubMed + Tavily (conditional)
 6. Two-tier reranking → Cohere Rerank 3.5 → MedCPT Cross-Encoder
@@ -136,6 +136,7 @@ Full rules are in `rules/always-on.md`. The summary:
 5. **Temperature ≤ 0.1** — for all medical generation
 6. **ICMR first** — for Indian conditions
 7. **Structured JSON always** — no plain text medical responses
+8. **Absolute brand neutrality** — use ONLY the generic (INN) name in the final output
 
 ---
 
