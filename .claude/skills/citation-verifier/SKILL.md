@@ -1,6 +1,7 @@
 ---
 name: citation-verifier
-description: Use this skill when building or debugging post-generation citation verification in RAG systems — including claim decomposition, NLI entailment checking, citation correction, confidence scoring, and the complete P-Cite pipeline. Also trigger for: hallucinated citations, citation alignment bugs, "does the cited source support this claim", LLM-as-judge verification, MiniCheck, AlignScore. Applies to any domain where citation accuracy is critical.
+description: >-
+  Use this skill when building or debugging post-generation citation verification in RAG systems — including claim decomposition, NLI entailment checking, citation correction, confidence scoring, and the complete P-Cite pipeline. Also trigger for: hallucinated citations, citation alignment bugs, "does the cited source support this claim", LLM-as-judge verification, MiniCheck, AlignScore. Applies to any domain where citation accuracy is critical.
 ---
 
 # Citation Verifier — The Post-Generation Verification Pipeline

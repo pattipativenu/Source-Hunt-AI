@@ -1,6 +1,7 @@
 ---
 name: article-writing
-description: Use this skill when writing any long-form content — blog posts, technical articles, white papers, medical summaries, case studies, research briefs, LinkedIn posts, or newsletter content. Also trigger for: writing without AI-sounding language, adopting a specific voice, structuring arguments, writing with authority on technical topics, translating jargon for non-expert audiences. The goal is writing that sounds like a specific, knowledgeable human — not a committee or a chatbot.
+description: >-
+  Use this skill when writing any long-form content — blog posts, technical articles, white papers, medical summaries, case studies, research briefs, LinkedIn posts, or newsletter content. Also trigger for: writing without AI-sounding language, adopting a specific voice, structuring arguments, writing with authority on technical topics, translating jargon for non-expert audiences. The goal is writing that sounds like a specific, knowledgeable human — not a committee or a chatbot.
 ---
 
 # Article Writing — Long-Form Without the AI Stench

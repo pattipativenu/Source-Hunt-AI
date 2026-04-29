@@ -1,6 +1,7 @@
 ---
 name: cost-aware-llm-pipeline
-description: Use this skill when building or optimizing LLM pipelines where cost matters — including model selection by query complexity, token count optimization, prompt compression, response caching, budget tracking per query, and cost projection. Also trigger for: Gemini pricing, LLM routing logic, context window management, prompt engineering for cost reduction, token budgeting, cost-per-query calculation. Applies to any project using LLM APIs at scale.
+description: >-
+  Use this skill when building or optimizing LLM pipelines where cost matters — including model selection by query complexity, token count optimization, prompt compression, response caching, budget tracking per query, and cost projection. Also trigger for: Gemini pricing, LLM routing logic, context window management, prompt engineering for cost reduction, token budgeting, cost-per-query calculation. Applies to any project using LLM APIs at scale.
 ---
 
 # Cost-Aware LLM Pipeline

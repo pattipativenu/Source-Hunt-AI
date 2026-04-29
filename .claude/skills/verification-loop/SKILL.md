@@ -1,6 +1,7 @@
 ---
 name: verification-loop
-description: Use this skill when building or implementing verification loops — automated pipelines that generate, check, fix, and re-verify outputs until quality criteria are met. Also trigger for: iterative correction, automatic quality enforcement, self-healing pipelines, LLM output validation loops, assertion-based generation, retry-with-correction. Applies to any AI generation system where output quality must meet defined criteria.
+description: >-
+  Use this skill when building or implementing verification loops — automated pipelines that generate, check, fix, and re-verify outputs until quality criteria are met. Also trigger for: iterative correction, automatic quality enforcement, self-healing pipelines, LLM output validation loops, assertion-based generation, retry-with-correction. Applies to any AI generation system where output quality must meet defined criteria.
 ---
 
 # Verification Loop — Generate → Verify → Correct → Repeat

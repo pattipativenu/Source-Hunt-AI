@@ -1,6 +1,7 @@
 ---
 name: tavily-search
-description: Use this skill whenever you need to integrate Tavily API for real-time web search, retrieve recent articles not yet indexed in databases, find cutting-edge research published in the last 30-90 days, supplement PubMed results with current web content, or build hybrid retrieval pipelines that combine vector search with live web retrieval. Trigger on: Tavily integration, live web search in RAG, recent publications not in PubMed, breaking research, web content retrieval, real-time document fetching.
+description: >-
+  Use this skill whenever you need to integrate Tavily API for real-time web search, retrieve recent articles not yet indexed in databases, find cutting-edge research published in the last 30-90 days, supplement PubMed results with current web content, or build hybrid retrieval pipelines that combine vector search with live web retrieval. Trigger on: Tavily integration, live web search in RAG, recent publications not in PubMed, breaking research, web content retrieval, real-time document fetching.
 ---
 
 # Tavily Search Integration

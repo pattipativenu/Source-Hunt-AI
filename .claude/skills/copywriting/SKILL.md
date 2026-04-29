@@ -1,6 +1,7 @@
 ---
 name: copywriting
-description: Use this skill for writing any content that must persuade, inform, or communicate clearly — including product descriptions, technical documentation, medical summaries, marketing copy, WhatsApp response templates, onboarding messages, landing pages, API documentation, or any written communication. Also trigger for: editing bland AI-generated text, removing corporate jargon, improving readability, adapting tone for different audiences (doctors vs patients vs investors), and structuring arguments for maximum impact. This skill applies to any domain.
+description: >-
+  Use this skill for writing any content that must persuade, inform, or communicate clearly — including product descriptions, technical documentation, medical summaries, marketing copy, WhatsApp response templates, onboarding messages, landing pages, API documentation, or any written communication. Also trigger for: editing bland AI-generated text, removing corporate jargon, improving readability, adapting tone for different audiences (doctors vs patients vs investors), and structuring arguments for maximum impact. This skill applies to any domain.
 ---
 
 # Copywriting — Clarity, Precision, Persuasion

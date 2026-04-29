@@ -1,6 +1,7 @@
 ---
 name: search-first
-description: Use this skill before starting any implementation task that involves unfamiliar APIs, third-party libraries, infrastructure patterns, or technical decisions where the wrong choice wastes days. This skill enforces the research-before-coding discipline: find the right approach first, then implement it. Trigger for: "how should I implement X", "what's the best library for Y", "before I start coding", API integration planning, architecture decisions, library selection. Applies to any technical project.
+description: >-
+  Use this skill before starting any implementation task that involves unfamiliar APIs, third-party libraries, infrastructure patterns, or technical decisions where the wrong choice wastes days. This skill enforces the research-before-coding discipline: find the right approach first, then implement it. Trigger for: "how should I implement X", "what's the best library for Y", "before I start coding", API integration planning, architecture decisions, library selection. Applies to any technical project.
 ---
 
 # Search First — Research Before You Code

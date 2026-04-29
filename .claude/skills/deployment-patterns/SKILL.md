@@ -1,6 +1,7 @@
 ---
 name: deployment-patterns
-description: Use this skill for deploying Python services to GCP Cloud Run, setting up CI/CD, Dockerizing applications, managing health checks, and configuring rollback strategies. Also trigger for: Cloud Run deployment, Docker multi-stage builds, GitHub Actions CI, environment variable injection, zero-downtime deployment, Cloud Run concurrency settings, GCP Secret Manager. Applies to any GCP-hosted API service.
+description: >-
+  Use this skill for deploying Python services to GCP Cloud Run, setting up CI/CD, Dockerizing applications, managing health checks, and configuring rollback strategies. Also trigger for: Cloud Run deployment, Docker multi-stage builds, GitHub Actions CI, environment variable injection, zero-downtime deployment, Cloud Run concurrency settings, GCP Secret Manager. Applies to any GCP-hosted API service.
 ---
 
 # Deployment Patterns — GCP Cloud Run

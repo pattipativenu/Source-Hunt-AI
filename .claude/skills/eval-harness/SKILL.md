@@ -1,6 +1,7 @@
 ---
 name: eval-harness
-description: Use this skill when building evaluation frameworks for AI systems — defining quality criteria, writing test cases with expected outputs, running evaluations against defined metrics, tracking regressions, and producing evaluation reports. Also trigger for: LLM evaluation, benchmark design, quality gates, RAGAS setup, assertion-based testing for AI outputs, grading rubrics for subjective outputs. Applies to any AI/LLM system that needs measurable quality assurance.
+description: >-
+  Use this skill when building evaluation frameworks for AI systems — defining quality criteria, writing test cases with expected outputs, running evaluations against defined metrics, tracking regressions, and producing evaluation reports. Also trigger for: LLM evaluation, benchmark design, quality gates, RAGAS setup, assertion-based testing for AI outputs, grading rubrics for subjective outputs. Applies to any AI/LLM system that needs measurable quality assurance.
 ---
 
 # Eval Harness — Measuring AI System Quality

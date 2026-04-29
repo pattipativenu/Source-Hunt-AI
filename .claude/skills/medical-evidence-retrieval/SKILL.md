@@ -1,6 +1,7 @@
 ---
 name: medical-evidence-retrieval
-description: Use this skill when building, debugging, or extending the medical evidence retrieval pipeline — including source priority routing (ICMR > international guidelines > journals), specialty-specific journal targeting, drug brand-to-generic resolution for Indian medicines, PICO query construction for clinical questions, multi-source parallel retrieval orchestration, and evidence tier classification. Also trigger for: ICMR guidelines, Indian drug formulary, clinical evidence synthesis, PubMed MeSH for medical specialties, evidence hierarchy in medicine. Applies to any clinical decision support system.
+description: >-
+  Use this skill when building, debugging, or extending the medical evidence retrieval pipeline — including source priority routing (ICMR > international guidelines > journals), specialty-specific journal targeting, drug brand-to-generic resolution for Indian medicines, PICO query construction for clinical questions, multi-source parallel retrieval orchestration, and evidence tier classification. Also trigger for: ICMR guidelines, Indian drug formulary, clinical evidence synthesis, PubMed MeSH for medical specialties, evidence hierarchy in medicine. Applies to any clinical decision support system.
 ---
 
 # Medical Evidence Retrieval — Domain-Specific Orchestration

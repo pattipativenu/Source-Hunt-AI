@@ -1,6 +1,7 @@
 ---
 name: api-design
-description: Use this skill when designing or reviewing REST APIs — including endpoint naming, request/response schemas, error formats, pagination, versioning, status codes, and authentication patterns. Also trigger for: FastAPI design, webhook design, API documentation, OpenAPI/Swagger, rate limit headers, idempotency. Applies to any language or framework.
+description: >-
+  Use this skill when designing or reviewing REST APIs — including endpoint naming, request/response schemas, error formats, pagination, versioning, status codes, and authentication patterns. Also trigger for: FastAPI design, webhook design, API documentation, OpenAPI/Swagger, rate limit headers, idempotency. Applies to any language or framework.
 ---
 
 # API Design — Production REST Patterns

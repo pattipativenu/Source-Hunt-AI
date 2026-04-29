@@ -1,6 +1,7 @@
 ---
 name: security-review
-description: Use this skill before deploying any code that handles user input, external APIs, medical data, authentication, webhooks, or LLM integrations. Also trigger for: security audit, vulnerability scan, OWASP checklist, prompt injection, API security, secret management, rate limiting, input validation. Applies to any web API, AI system, or data pipeline.
+description: >-
+  Use this skill before deploying any code that handles user input, external APIs, medical data, authentication, webhooks, or LLM integrations. Also trigger for: security audit, vulnerability scan, OWASP checklist, prompt injection, API security, secret management, rate limiting, input validation. Applies to any web API, AI system, or data pipeline.
 ---
 
 # Security Review — Production Hardening Checklist

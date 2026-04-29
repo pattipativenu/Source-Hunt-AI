@@ -1,6 +1,7 @@
 ---
 name: python-testing
-description: Use this skill when writing, reviewing, or improving Python tests — including unit tests, integration tests, async tests, mocking external APIs, testing LLM pipelines, fixture design, and test coverage analysis with pytest. Also trigger for: TDD workflow, test structure review, flaky tests, mocking httpx/requests/qdrant/gemini, parametrize patterns, and test-driven development for AI systems. Applies to any Python project.
+description: >-
+  Use this skill when writing, reviewing, or improving Python tests — including unit tests, integration tests, async tests, mocking external APIs, testing LLM pipelines, fixture design, and test coverage analysis with pytest. Also trigger for: TDD workflow, test structure review, flaky tests, mocking httpx/requests/qdrant/gemini, parametrize patterns, and test-driven development for AI systems. Applies to any Python project.
 ---
 
 # Python Testing — pytest Patterns for Production Systems

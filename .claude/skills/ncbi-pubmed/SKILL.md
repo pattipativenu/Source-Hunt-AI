@@ -1,6 +1,7 @@
 ---
 name: ncbi-pubmed
-description: Use this skill whenever you integrate with NCBI E-utilities for PubMed searches, fetch biomedical literature, retrieve PubMed Central full-text via BioC API, build MeSH-based search strategies, handle NCBI rate limits, or work with PMID/PMCID/DOI resolution. Trigger on: PubMed, NCBI, E-utilities, biomedical search, MeSH, ESearch, EFetch, PMC, BioC API, medical literature retrieval.
+description: >-
+  Use this skill whenever you integrate with NCBI E-utilities for PubMed searches, fetch biomedical literature, retrieve PubMed Central full-text via BioC API, build MeSH-based search strategies, handle NCBI rate limits, or work with PMID/PMCID/DOI resolution. Trigger on: PubMed, NCBI, E-utilities, biomedical search, MeSH, ESearch, EFetch, PMC, BioC API, medical literature retrieval.
 ---
 
 # NCBI PubMed Integration

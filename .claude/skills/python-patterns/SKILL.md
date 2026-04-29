@@ -1,6 +1,7 @@
 ---
 name: python-patterns
-description: Use this skill whenever you write Python code and want to follow production-grade idioms — including async patterns, dataclass design, dependency injection, configuration management, retry logic, and structural anti-patterns to avoid. Trigger for: Python code review, architecture design, async Python, FastAPI, Pydantic, Python data pipelines, API clients, background workers. Widely applicable to any Python project.
+description: >-
+  Use this skill whenever you write Python code and want to follow production-grade idioms — including async patterns, dataclass design, dependency injection, configuration management, retry logic, and structural anti-patterns to avoid. Trigger for: Python code review, architecture design, async Python, FastAPI, Pydantic, Python data pipelines, API clients, background workers. Widely applicable to any Python project.
 ---
 
 # Python Patterns — Production-Grade Idioms

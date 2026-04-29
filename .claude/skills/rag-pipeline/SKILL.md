@@ -1,6 +1,7 @@
 ---
 name: rag-pipeline
-description: Use this skill whenever you're building, debugging, or optimizing a Retrieval-Augmented Generation (RAG) pipeline — including embedding generation, vector storage, hybrid search, reranking, LLM generation with citations, and post-generation verification. Also trigger for: context window management, "lost in the middle" problems, citation hallucination debugging, faithfulness evaluation, RAGAS metrics, retrieval latency optimization. This skill applies to any domain (medical, legal, financial, technical) and any vector DB (Qdrant, Pinecone, Weaviate, pgvector).
+description: >-
+  Use this skill whenever you're building, debugging, or optimizing a Retrieval-Augmented Generation (RAG) pipeline — including embedding generation, vector storage, hybrid search, reranking, LLM generation with citations, and post-generation verification. Also trigger for: context window management, "lost in the middle" problems, citation hallucination debugging, faithfulness evaluation, RAGAS metrics, retrieval latency optimization. This skill applies to any domain (medical, legal, financial, technical) and any vector DB (Qdrant, Pinecone, Weaviate, pgvector).
 ---
 
 # RAG Pipeline — Production Patterns

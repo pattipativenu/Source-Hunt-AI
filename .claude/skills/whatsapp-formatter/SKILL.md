@@ -1,6 +1,7 @@
 ---
 name: whatsapp-formatter
-description: Use this skill when building WhatsApp message formatters — including 4096-character splitting, citation alignment in plain text, reply button generation, markdown conversion, multi-part message handling, and Meta Cloud API delivery. Also trigger for: WhatsApp Business API, interactive message buttons, typing indicators, message deduplication, delivery receipts. Applies to any WhatsApp-delivered application.
+description: >-
+  Use this skill when building WhatsApp message formatters — including 4096-character splitting, citation alignment in plain text, reply button generation, markdown conversion, multi-part message handling, and Meta Cloud API delivery. Also trigger for: WhatsApp Business API, interactive message buttons, typing indicators, message deduplication, delivery receipts. Applies to any WhatsApp-delivered application.
 ---
 
 # WhatsApp Formatter — Delivering Complex Content in 4,096 Characters

@@ -1,6 +1,7 @@
 ---
 name: tdd-workflow
-description: Use this skill when writing any new function, class, or module using Test-Driven Development — write failing tests first, implement to make them pass, refactor. Also trigger for: "write tests first", "red-green-refactor", "TDD", "failing tests before implementation", designing APIs through tests. Applies to any language or project.
+description: >-
+  Use this skill when writing any new function, class, or module using Test-Driven Development — write failing tests first, implement to make them pass, refactor. Also trigger for: "write tests first", "red-green-refactor", "TDD", "failing tests before implementation", designing APIs through tests. Applies to any language or project.
 ---
 
 # TDD Workflow — Red, Green, Refactor
