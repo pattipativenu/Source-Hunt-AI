@@ -1,7 +1,7 @@
-# Graph Report - hunt.ai  (2026-04-28)
+# Graph Report - hunt.ai  (2026-04-29)
 
 ## Corpus Check
-- 43 files · ~33,890 words
+- 43 files · ~34,346 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
