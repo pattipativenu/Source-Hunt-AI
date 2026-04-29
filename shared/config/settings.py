@@ -39,12 +39,10 @@ class Settings(BaseSettings):
         default="indian_drugs", alias="QDRANT_COLLECTION_DRUGS"
     )
 
-    # ── Gemini ────────────────────────────────────────────────────────────────
-    # Two auth modes:
-    #   GEMINI_USE_VERTEX=false → uses GEMINI_API_KEY (Google AI Studio, simpler)
-    #   GEMINI_USE_VERTEX=true  → uses Application Default Credentials (Vertex AI)
-    gemini_api_key: str | None = Field(default=None, alias="GEMINI_API_KEY")
-    gemini_use_vertex: bool = Field(default=False, alias="GEMINI_USE_VERTEX")
+    # ── Gemini / Vertex AI ────────────────────────────────────────────────────
+    # Auth: Application Default Credentials (ADC) only.
+    #   Local:     gcloud auth application-default login
+    #   Cloud Run: uses attached service account automatically
     gemini_model_primary: str = Field(
         default="gemini-2.5-flash-preview-05-20", alias="GEMINI_MODEL_PRIMARY"
     )
@@ -87,7 +85,7 @@ class Settings(BaseSettings):
 
     # ── Embedding backend ─────────────────────────────────────────────────────
     # "bge"    → BAAI/bge-m3 (dense + sparse, multilingual, self-hosted)
-    # "google" → text-embedding-004 via Gemini API (dense only, no GPU needed)
+    # "google" → text-embedding-004 via Vertex AI ADC (dense only, no GPU needed)
     embedding_backend: str = Field(default="bge", alias="EMBEDDING_BACKEND")
     google_embedding_model: str = Field(
         default="text-embedding-004", alias="GOOGLE_EMBEDDING_MODEL"

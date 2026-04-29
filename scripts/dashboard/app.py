@@ -64,12 +64,6 @@ with st.sidebar:
         type="password",
         help="Get free trial at cohere.com",
     )
-    gemini_key = st.text_input(
-        "Gemini API Key",
-        value=os.getenv("GEMINI_API_KEY", ""),
-        type="password",
-        help="Get from aistudio.google.com",
-    )
 
     st.subheader("⚙️ Rerankers to test")
     use_cohere = st.checkbox("Cohere Rerank 3.5 (cloud)", value=bool(cohere_key))
@@ -78,12 +72,11 @@ with st.sidebar:
     use_medcpt = st.checkbox("MedCPT Cross-Encoder · NCBI (local, 110M)", value=True)
 
     st.subheader("🤖 Gemini Generation")
-    enable_gemini = st.checkbox("Enable Gemini answer generation", value=bool(gemini_key))
+    enable_gemini = st.checkbox("Enable Gemini answer generation", value=True)
     gemini_models_selected = st.multiselect(
         "Models to compare:",
         ["gemini-2.5-flash-preview-05-20", "gemini-2.5-pro-preview-05-06"],
-        default=["gemini-2.5-flash-preview-05-20", "gemini-2.5-pro-preview-05-06"]
-        if gemini_key else ["gemini-2.5-flash-preview-05-20"],
+        default=["gemini-2.5-flash-preview-05-20", "gemini-2.5-pro-preview-05-06"],
     )
 
     st.subheader("📄 Query source")
@@ -103,9 +96,9 @@ with st.sidebar:
     st.subheader("🔡 Embedding backend")
     embedding_backend = st.radio(
         "For live Qdrant queries:",
-        ["BGE-M3 (dense + sparse, local)", "Google text-embedding-004 (dense only, API)"],
+        ["BGE-M3 (dense + sparse, local)", "Google text-embedding-004 (dense only, Vertex AI)"],
         index=0,
-        help="BGE-M3 requires the embedding service running. Google uses your GEMINI_API_KEY.",
+        help="BGE-M3 requires the embedding service running. Google uses Vertex AI (ADC).",
     )
 
     st.divider()
@@ -153,31 +146,23 @@ def _generate_gemini(
     query: str,
     top_chunks: list[str],
     model_name: str,
-    api_key: str,
 ) -> dict:
-    """Generate an answer using Gemini. Returns {answer, latency_ms, error}."""
+    """Generate an answer using Gemini via Vertex AI ADC. Returns {answer, latency_ms, error}."""
     try:
-        import google.generativeai as genai
+        from shared.utils.gemini_client import get_gemini_model, make_generation_config
     except ImportError:
-        return {"answer": "", "latency_ms": 0, "error": "google-generativeai not installed"}
+        return {"answer": "", "latency_ms": 0, "error": "shared module not importable — check PYTHONPATH"}
 
     try:
-        genai.configure(api_key=api_key)
-        model = genai.GenerativeModel(model_name)
-
+        model = get_gemini_model(model_name)
         chunks_text = "\n\n".join(
             f"[{i+1}] {chunk}" for i, chunk in enumerate(top_chunks)
         )
         prompt = _GENERATION_PROMPT.format(query=query, chunks=chunks_text)
+        config = make_generation_config(temperature=0.2, max_output_tokens=2048, json_mode=False)
 
         t0 = time.perf_counter()
-        response = model.generate_content(
-            prompt,
-            generation_config=genai.types.GenerationConfig(
-                temperature=0.2,
-                max_output_tokens=2048,
-            ),
-        )
+        response = model.generate_content(prompt, generation_config=config)
         latency_ms = (time.perf_counter() - t0) * 1000
 
         return {
@@ -422,7 +407,7 @@ if run_clicked:
             st.dataframe(pd.DataFrame(rows), use_container_width=True)
 
     # ── Gemini Generation Comparison ──────────────────────────────────────────
-    if enable_gemini and gemini_key and gemini_models_selected:
+    if enable_gemini and gemini_models_selected:
         st.divider()
         st.subheader("🤖 Gemini Answer Generation")
         st.caption(
@@ -454,7 +439,7 @@ if run_clicked:
                 with ThreadPoolExecutor(max_workers=len(gemini_models_selected)) as pool:
                     gemini_futures = {
                         pool.submit(
-                            _generate_gemini, query, top_chunks, model_name, gemini_key
+                            _generate_gemini, query, top_chunks, model_name
                         ): model_name
                         for model_name in gemini_models_selected
                     }
@@ -525,6 +510,3 @@ if run_clicked:
                     st.write("")
         else:
             st.warning("No valid reranker results to use as generation context.")
-    elif enable_gemini and not gemini_key:
-        st.divider()
-        st.warning("Enter your Gemini API key in the sidebar to enable answer generation.")

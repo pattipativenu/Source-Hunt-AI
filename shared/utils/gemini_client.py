@@ -1,13 +1,9 @@
 """
-Gemini client factory.
+Gemini client factory — Vertex AI only.
 
-Supports two auth modes controlled by GEMINI_USE_VERTEX:
-  false (default) → google-generativeai SDK with GEMINI_API_KEY (Google AI Studio)
-  true            → google-cloud-aiplatform / vertexai SDK with ADC (Vertex AI)
-
-Using AI Studio is recommended for solo dev / local testing — no gcloud auth needed,
-no GCP project billing surprises, and the free tier is generous.
-Switch to Vertex AI before production for enterprise SLAs and VPC controls.
+Auth: Application Default Credentials (ADC).
+  Local:     gcloud auth application-default login
+  Cloud Run: uses attached service account automatically
 """
 
 from __future__ import annotations
@@ -16,41 +12,18 @@ from typing import Any
 
 
 def get_gemini_model(model_name: str) -> Any:
-    """
-    Return a Gemini GenerativeModel instance using the appropriate SDK.
-    Lazy-imports to avoid loading both SDKs at module level.
-    """
+    """Return a Vertex AI GenerativeModel using ADC. Lazy-imports to keep startup fast."""
     from shared.config import get_settings
     settings = get_settings()
 
-    if settings.gemini_use_vertex:
-        return _get_vertex_model(model_name, settings)
-    else:
-        return _get_aistudio_model(model_name, settings)
-
-
-def _get_aistudio_model(model_name: str, settings: Any) -> Any:
-    """Google AI Studio path — uses GEMINI_API_KEY."""
-    try:
-        import google.generativeai as genai  # type: ignore[import]
-    except ImportError as e:
-        raise RuntimeError("Run: pip install google-generativeai") from e
-
-    if not settings.gemini_api_key:
-        raise ValueError(
-            "GEMINI_API_KEY is not set. Get one at aistudio.google.com → Get API key."
-        )
-    genai.configure(api_key=settings.gemini_api_key)
-    return genai.GenerativeModel(model_name)
-
-
-def _get_vertex_model(model_name: str, settings: Any) -> Any:
-    """Vertex AI path — uses Application Default Credentials."""
     try:
         import vertexai
         from vertexai.generative_models import GenerativeModel
     except ImportError as e:
-        raise RuntimeError("Run: pip install google-cloud-aiplatform") from e
+        raise RuntimeError(
+            "Run: pip install google-cloud-aiplatform\n"
+            "Local auth: gcloud auth application-default login"
+        ) from e
 
     vertexai.init(project=settings.gcp_project_id, location=settings.gcp_region)
     return GenerativeModel(model_name)

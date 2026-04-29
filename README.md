@@ -169,7 +169,7 @@ The pipeline produces **three confidence levels**:
 - GCP project with Pub/Sub, Cloud Run, Cloud Storage enabled
 - [Twilio account](https://console.twilio.com) (WhatsApp sandbox or production)
 - [Qdrant Cloud](https://cloud.qdrant.io) account (free tier: 500K chunks)
-- [Gemini API key](https://aistudio.google.com/app/apikey) (or Vertex AI)
+- Google Cloud SDK with Application Default Credentials (ADC) configured for Vertex AI
 
 ### 1. Clone and configure
 
@@ -230,10 +230,9 @@ TWILIO_ACCOUNT_SID=ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 TWILIO_AUTH_TOKEN=your_auth_token
 TWILIO_WHATSAPP_NUMBER=whatsapp:+14155238886
 
-# ── Gemini (choose one auth mode) ────────────────────────────────
-GEMINI_API_KEY=AIza...               # Google AI Studio
-# OR
-GEMINI_USE_VERTEX=true               # Vertex AI (uses gcloud ADC)
+# ── Gemini / Vertex AI (ADC — no API key required) ───────────────
+# Local:     gcloud auth application-default login
+# Cloud Run: uses attached service account automatically
 
 # ── Vector DB ────────────────────────────────────────────────────
 QDRANT_URL=https://xxx.qdrant.io
@@ -360,4 +359,4 @@ hunt.ai/
 
 ## License
 
-MIT License © 2026 pattipativenu
+Apache License 2.0 © 2026 pattipativenu

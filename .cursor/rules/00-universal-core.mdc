@@ -1,0 +1,14 @@
+---
+description: universal-core bootstrap
+alwaysApply: true
+---
+
+Use root `AGENTS.md` as the universal orchestration contract.
+
+Canonical content is maintained in:
+- `.claude/skills/`
+- `.claude/agents/`
+- `.claude/rules/`
+- `.claude/hooks/`
+
+This `.cursor/` directory is an adapter layer only.

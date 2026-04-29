@@ -1,7 +1,7 @@
 """
-Generation layer using Gemini via Google AI Studio or Vertex AI.
+Generation layer using Gemini via Vertex AI.
 
-Auth mode is controlled by GEMINI_USE_VERTEX in .env (default: AI Studio).
+Authentication uses Application Default Credentials (ADC).
 Produces a structured HuntAIResponse JSON from the top-K ranked chunks.
 """
 
